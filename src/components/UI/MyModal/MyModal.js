@@ -1,4 +1,6 @@
-import React from 'react';
+import React,{useState} from 'react';
+import {Redirect} from 'react-router-dom'
+
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -20,9 +22,11 @@ const useStyles = makeStyles(theme => ({
 
 const MyModal = props => {
     const classes = useStyles();
+    const [shouldRedirect,setShouldRedirect] = useState(false);
     const open = props.show;
 
     const handleClose = () => {
+        setShouldRedirect(true);
         props.clearError();
     };
 
@@ -48,6 +52,7 @@ const MyModal = props => {
                     </div>
                 </Fade>
             </Modal>
+            {shouldRedirect ? <Redirect to='/' /> : null}
         </div>
     );
 }

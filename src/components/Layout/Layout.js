@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,12 +8,12 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
     },
-    paper: {
+    insideDiv: {
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
-    insideDiv: {
+    outsideDiv: {
         position: 'absolute',
         top: '50vh',
         left: '50vw',
@@ -30,11 +29,11 @@ const Layout = props => {
     return (
         <div className={classes.root}>
 
-            <div className={classes.insideDiv}>
+            <div className={classes.outsideDiv}>
                 <Grid item xs={12}>
-                    <Paper className={classes.paper} elevation={3}>
+                    <div className={classes.insideDiv} >
                         {props.children}
-                    </Paper>
+                    </div>
                 </Grid>
             </div>
 

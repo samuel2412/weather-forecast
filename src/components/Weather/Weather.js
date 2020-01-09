@@ -21,9 +21,8 @@ const useStyles = makeStyles(theme => ({
         marginTop: 12,
     },
     large: {
-        width: theme.spacing(7),
-        height: theme.spacing(7),
-        borderStyle: 'solid',
+        width: theme.spacing(10),
+        height: theme.spacing(10),
         margin: 'auto'
     },
     tempGroup: {
@@ -146,7 +145,6 @@ const Weather = props => {
             </CardContent>
             <CardActions>
                 <Button
-                    variant="outlined"
                     color="primary"
                     onClick={event=>{props.backHandler(event)}}>
                     Voltar

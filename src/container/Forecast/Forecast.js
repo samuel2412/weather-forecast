@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+
 import axios from '../../axios-instance';
 
 import Loading from '../../components/UI/Loading/Loading';
 import Weather from '../../components/Weather/Weather';
 import errorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+
 
 const Forecast = props => {
     const query = props.match.params.query;
@@ -13,15 +15,15 @@ const Forecast = props => {
     useEffect(() => {
         axios.get(`weather?q=${query}&units=metric&APPID=59a3e0cc4e296aed40918ac8d08338a2`)
             .then((response) => {
-                setWeatherData(response.data);
-                setIsLoading(false);
+                    setWeatherData(response.data);
+                    setIsLoading(false);
             })
             .catch((error) => {
                 setIsLoading(false);
             });
     }, [query])
 
-    const backHandler = (event) =>{
+    const backHandler = (event) => {
         event.preventDefault();
         props.history.push('/')
     }
@@ -31,12 +33,11 @@ const Forecast = props => {
         <Loading query={query} />
     );
 
-    if (!isLoading) {
+    if (!isLoading && weatherData) {
         content = (
-            <Weather weatherData={weatherData} backHandler={backHandler}/>
+            <Weather weatherData={weatherData} backHandler={backHandler} />
         )
     }
-
     return (
         <React.Fragment>
             {content}

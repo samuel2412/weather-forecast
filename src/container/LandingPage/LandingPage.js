@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import Paper from '@material-ui/core/Paper'
+
 import SearchForm from '../../components/SearchForm/SearchForm';
 
 const LandingPage = props => {
@@ -12,10 +14,12 @@ const LandingPage = props => {
 
   return (
     <React.Fragment>
+      <Paper style={{padding: '20px'}}>
       <SearchForm
         onSubmit={searchHandler}
         searchInput={searchInput}
         setSearchInput={setSearchInput} />
+        </Paper>
     </React.Fragment>
   );
 }
