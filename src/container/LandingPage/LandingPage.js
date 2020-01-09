@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../../axios-instance';
 
 import SearchForm from '../../components/SearchForm/SearchForm';
 import Loading from '../../components/Loading/Loading';
+import errorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import Forecast from '../../components/Forecast/Forecast';
+
 
 const LandingPage = props => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchInput, setSearchInput] = useState('');
+  const [weatherData, setWeatherData] = useState('');
 
-  const searchHandler = () => {
+
+  const searchHandler = (event) => {
+    event.preventDefault();
     setIsLoading(true);
-    axios.get('https://samples.openweathermap.org/data/2.5/forecast/daily?id=524901&appid=b1b15e88fa797225412429c1c50c122a1')
+    axios.get('weather?q=London,uk&units=metric&APPID=59a3e0cc4e296aed40918ac8d08338a2')
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
+        setWeatherData(response.data);
         setIsLoading(false);
-
       })
       .catch((error) => {
         console.log(error);
@@ -23,9 +29,7 @@ const LandingPage = props => {
   }
 
 
-
-  //<Loading searchInput="São Paulo, BR"/>
-  return (
+  let content = (
     <React.Fragment>
       {isLoading ? <Loading searchInput={searchInput} />
         : <SearchForm
@@ -35,6 +39,18 @@ const LandingPage = props => {
 
     </React.Fragment>
   );
+
+  if (weatherData) {
+    content = (
+      <Forecast />
+    );
+  }
+
+  return (
+    <React.Fragment>
+      {content}
+    </React.Fragment>
+  );
 }
 
-export default LandingPage;
+export default errorHandler(LandingPage, axios);

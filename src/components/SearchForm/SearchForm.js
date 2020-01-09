@@ -16,13 +16,11 @@ const useStyles = makeStyles(theme => ({
 
 const SearchForm = props => {
     const classes = useStyles();
-
-
-
+    
     return (
 
         <React.Fragment>
-            <form className={classes.root} onSubmit={()=>props.onSubmit()}>
+            <form className={classes.root} onSubmit={(event)=>props.onSubmit(event)}>
                 <div>
                     <TextField
                         id="outlined-password-input"
@@ -31,6 +29,7 @@ const SearchForm = props => {
                         variant="outlined"
                         value={props.searchInput}
                         onChange={ (event) => props.setSearchInput(event.target.value)}
+                        required
                     />
                 </div>
                 <Button type="submit" variant="contained" color="primary">
