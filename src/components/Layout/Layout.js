@@ -19,6 +19,8 @@ const useStyles = makeStyles(theme => ({
         top: '50vh',
         left: '50vw',
         transform: 'translate(-50%, -50%)',
+        width: '80vw',
+        height: '80vh',
     },
 }));
 

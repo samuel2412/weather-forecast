@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from '../../axios-instance';
-//import WbSunnyOutlinedIcon from '@material-ui/icons/WbSunnyOutlined';
 
-import Loading from '../../components/Loading/Loading';
+import Loading from '../../components/UI/Loading/Loading';
+import Weather from '../../components/Weather/Weather';
 import errorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 const Forecast = props => {
@@ -10,29 +10,30 @@ const Forecast = props => {
     const [isLoading, setIsLoading] = useState(true);
     const [weatherData, setWeatherData] = useState('');
 
-
-    const searchHandler = () => {
+    useEffect(() => {
         axios.get(`weather?q=${query}&units=metric&APPID=59a3e0cc4e296aed40918ac8d08338a2`)
             .then((response) => {
-                console.log(response.data);
                 setWeatherData(response.data);
                 setIsLoading(false);
             })
             .catch((error) => {
-                console.log(error);
                 setIsLoading(false);
             });
+    }, [query])
+
+    const backHandler = (event) =>{
+        event.preventDefault();
+        props.history.push('/')
     }
 
+
     let content = (
-        <Loading />
+        <Loading query={query} />
     );
 
     if (!isLoading) {
         content = (
-            <div>
-                {weatherData}
-            </div>
+            <Weather weatherData={weatherData} backHandler={backHandler}/>
         )
     }
 

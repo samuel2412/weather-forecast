@@ -7,10 +7,10 @@ const Loading = props => {
 
     return (
         <React.Fragment>
-            <Typography variant="h5">
-                {props.searchInput}
+            <Typography  variant="button" >
+                {props.query}
             </Typography>
-            <LinearProgress variant="query" style={{ width: '80vw' }} />
+            <LinearProgress variant="query"/>
         </React.Fragment>
     );
 }
