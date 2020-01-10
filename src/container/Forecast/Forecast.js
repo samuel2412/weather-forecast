@@ -13,7 +13,7 @@ const Forecast = props => {
     const [weatherData, setWeatherData] = useState('');
 
     useEffect(() => {
-        axios.get(`weather?q=${query}&units=metric&APPID=59a3e0cc4e296aed40918ac8d08338a2`)
+        axios.get(`weather?q=${query}&units=metric&lang=pt_br&APPID=59a3e0cc4e296aed40918ac8d08338a2`)
             .then((response) => {
                     setWeatherData(response.data);
                     setIsLoading(false);

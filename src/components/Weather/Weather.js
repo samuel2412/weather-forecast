@@ -17,12 +17,13 @@ const useStyles = makeStyles(theme => ({
         fontSize: 14,
     },
     pos: {
+        textTransform: 'capitalize',
         marginBottom: 12,
         marginTop: 12,
     },
     large: {
-        width: theme.spacing(10),
-        height: theme.spacing(10),
+        width: theme.spacing(15),
+        height: theme.spacing(15),
         margin: 'auto'
     },
     tempGroup: {
@@ -64,22 +65,6 @@ const Weather = props => {
         return `${date.getHours()}:${date.getMinutes()}`
     }
 
-    const getDescriptionPT = (descriptionEN) => {
-        switch (descriptionEN) {
-            case ('clear sky'): return 'Céu Limpo';
-            case ('few clouds'): return 'Poucas Nuvens';
-            case ('scattered clouds'): return 'Parcialmente Nublado';
-            case ('broken clouds'): return 'Nublado';
-            case ('shower rain'): return 'Pancadas de Chuva';
-            case ('rain'): return 'Chuva';
-            case ('thunderstorm'): return 'Tempestade';
-            case ('snow'): return 'Neve';
-            case ('mist'): return 'Neblina';
-            default: return descriptionEN;
-        }
-    };
-
-    
     return (
         <Card className={classes.card} variant="outlined">
             <CardContent>
@@ -89,7 +74,7 @@ const Weather = props => {
                         {dateString(date)}
                     </Typography>
                 </Typography>
-                <Avatar alt={weather.description} src={`http://openweathermap.org/img/wn/${weather.icon}.png`} className={classes.large} />
+                <Avatar alt={weather.description} src={`https://openweathermap.org/img/wn/${weather.icon}.png`} className={classes.large} />
 
                 <br />
                 <div className={classes.tempGroup}>
@@ -121,7 +106,7 @@ const Weather = props => {
                 </div>
 
                 <Typography className={classes.pos} color="textSecondary">
-                    {getDescriptionPT(weather.description)}
+                    {weather.description}
                 </Typography>
 
                 <br />
