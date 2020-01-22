@@ -1,18 +1,13 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles(theme => ({
-    card: {
-        minWidth: 275,
-    },
     title: {
         fontSize: 14,
     },
@@ -66,76 +61,78 @@ const Weather = props => {
     }
 
     return (
-        <Card className={classes.card} variant="outlined">
-            <CardContent>
-                <Typography className={classes.title} color="textPrimary" gutterBottom>
-                    {props.weatherData.name}, {props.weatherData.sys.country}
-                    <Typography variant="caption" display="block" gutterBottom>
-                        {dateString(date)}
-                    </Typography>
+        <>
+            <Typography className={classes.title} color="textPrimary" gutterBottom>
+                {props.weatherData.name}, {props.weatherData.sys.country}
+                <Typography variant="caption" display="block" gutterBottom>
+                    {dateString(date)}
                 </Typography>
-                <Avatar alt={weather.description} src={`https://openweathermap.org/img/wn/${weather.icon}.png`} className={classes.large} />
+            </Typography>
+            <Avatar alt={weather.description} src={`https://openweathermap.org/img/wn/${weather.icon}.png`} className={classes.large} />
 
-                <br />
-                <div className={classes.tempGroup}>
+            <br />
+            <div className={classes.tempGroup}>
 
-                    <div className={classes.temp}>
-                        <Typography variant="caption">
-                            Mínima
+                <div className={classes.temp}>
+                    <Typography variant="caption">
+                        Mínima
                     </Typography>
-                        <Typography variant="h6" component="span">
-                            {`${Math.round(props.weatherData.main.temp_min)}°C`}
-                        </Typography>
-                    </div>
-
-                    <div className={classes.temp}>
-                        <br />
-                        <Typography variant="h5" component="span" style={{ fontWeight: 'bold' }}>
-                            {`${Math.round(props.weatherData.main.temp)}°C`}
-                        </Typography>
-                    </div>
-                    <div className={classes.temp}>
-                        <Typography variant="caption">
-                            Máxima
+                    <Typography variant="h6" component="span">
+                        {`${Math.round(props.weatherData.main.temp_min)}°C`}
                     </Typography>
-                        <Typography variant="h6" component="span">
-                            {`${Math.round(props.weatherData.main.temp_max)}°C`}
-                        </Typography>
-                    </div>
-
                 </div>
 
-                <Typography className={classes.pos} color="textSecondary">
-                    {weather.description}
-                </Typography>
+                <div className={classes.temp}>
+                    <Typography variant="caption">
+                        Atual
+                    </Typography>
+                    <Typography variant="h5" component="span" style={{ fontWeight: 'bold' }}>
+                        {`${Math.round(props.weatherData.main.temp)}°C`}
+                    </Typography>
+                </div>
+                <div className={classes.temp}>
+                    <Typography variant="caption">
+                        Máxima
+                    </Typography>
+                    <Typography variant="h6" component="span">
+                        {`${Math.round(props.weatherData.main.temp_max)}°C`}
+                    </Typography>
+                </div>
 
-                <br />
-                <Divider variant="middle" />
-                <br />
+            </div>
+
+            <Typography className={classes.pos} color="textSecondary">
+                {weather.description}
+            </Typography>
+
+            <br />
+            <Divider variant="middle" />
+            <br />
 
 
-                <Typography variant="body2" component="p">
-                    {`Umidade ${props.weatherData.main.humidity}%`}
-                </Typography>
-                <Typography variant="body2" component="p">
-                    {`Nascer do Sol ${getHoursMins(new Date(props.weatherData.sys.sunrise * 1000))}`}
-                </Typography>
-                <Typography variant="body2" component="p">
-                    {`Pôr do Sol ${getHoursMins(new Date(props.weatherData.sys.sunset * 1000))}`}
-                </Typography>
+            <Typography variant="body2" component="p">
+                {`Umidade ${props.weatherData.main.humidity}%`}
+            </Typography>
+            <Typography variant="body2" component="p">
+                {`Nascer do Sol ${getHoursMins(new Date(props.weatherData.sys.sunrise * 1000))}`}
+            </Typography>
+            <Typography variant="body2" component="p">
+                {`Pôr do Sol ${getHoursMins(new Date(props.weatherData.sys.sunset * 1000))}`}
+            </Typography>
 
-                <br />
-                <Divider variant="middle" />
+            <br />
+            <Divider variant="middle" />
 
-            </CardContent>
-            <CardActions>
-                <Button
+
+            
+                <IconButton
+                style={{display:'flex'}}
                     color="primary"
-                    onClick={event=>{props.backHandler(event)}}>
-                    Voltar
-                </Button>
-            </CardActions>
-        </Card>
+                    onClick={event => { props.backHandler(event) }}>
+                    <ArrowBackIcon />
+                </IconButton>
+            
+        </>
     );
 }
 export default Weather;

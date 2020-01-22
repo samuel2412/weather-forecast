@@ -1,25 +1,27 @@
 import React from 'react';
 
-import Grid from '@material-ui/core/Grid';
-
 import { makeStyles } from '@material-ui/core/styles';
+import lightBlue from '@material-ui/core/colors/lightBlue';
+import lightGreen from '@material-ui/core/colors/lightGreen';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        flexGrow: 1,
+        display: 'flex',
+        flex: 1,
+        minHeight: '100vh',
+        minWidth: '100vw',
+        backgroundImage: `linear-gradient(to bottom,${lightBlue[100]},${lightGreen[100]})`,
     },
-    insideDiv: {
+    content: {
         padding: theme.spacing(2),
+        margin: 'auto',
         textAlign: 'center',
-        color: theme.palette.text.secondary,
-    },
-    outsideDiv: {
-        position: 'absolute',
-        top: '50vh',
-        left: '50vw',
-        transform: 'translate(-50%, -50%)',
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.background.default,
+        borderRadius: '5px',
+        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
         width: '80vw',
-        height: '80vh',
+        height: '80vh',      
     },
 }));
 
@@ -28,14 +30,10 @@ const Layout = props => {
 
     return (
         <div className={classes.root}>
-
-            <div className={classes.outsideDiv}>
-                <Grid item xs={12}>
-                    <div className={classes.insideDiv} >
+  
+                    <div className={classes.content} >
                         {props.children}
-                    </div>
-                </Grid>
-            </div>
+                    </div> 
 
         </div>
     );

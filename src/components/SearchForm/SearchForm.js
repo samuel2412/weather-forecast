@@ -7,11 +7,16 @@ import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(3),
-            width: 200,
-        },
+        display: 'flex',
+        width: '100%',
+        height: '100%',
     },
+    content: {
+        margin: 'auto',
+    },
+    element: {
+        margin: theme.spacing(3),
+    }
 }));
 
 
@@ -20,25 +25,30 @@ const SearchForm = props => {
 
     return (
 
-        <React.Fragment>
-            <form className={classes.root} onSubmit={(event) => props.onSubmit(event)}>
-                <div>
-                    <TextField
-                        id="outlined-input"
-                        label="Cidade"
-                        type="text"
-                        variant="outlined"
-                        value={props.searchInput}
-                        onChange={(event) => props.setSearchInput(event.target.value)}
-                    />
-                </div>
-                <Button type="submit" variant="contained" color="primary" disabled={props.searchInput === ''}>
-                    <SearchIcon/>
-                    Procurar
-                </Button>
+        <div className={classes.root}>
 
-            </form>
-        </React.Fragment>
+            <div className={classes.content}>
+                <form onSubmit={(event) => props.onSubmit(event)}>
+                    <div className={classes.element}>
+
+                        <TextField
+                            id="outlined-input"
+                            label="Cidade"
+                            type="text"
+                            variant="outlined"
+                            value={props.searchInput}
+                            onChange={(event) => props.setSearchInput(event.target.value)}
+                        />
+                    </div>
+                    <div className={classes.element}>
+                        <Button type="submit" variant="contained" color="primary" disabled={props.searchInput === ''}>
+                            <SearchIcon />
+                            Procurar
+                </Button>
+                    </div>
+                </form>
+            </div>
+        </div >
 
     );
 }
